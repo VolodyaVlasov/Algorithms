@@ -66,24 +66,32 @@ public class SortLevel {
         }
     }
 
-    public static int ArrayChunk(int[] M) {
+    public static int ArrayChunk(int[] M, int l, int r) {
         int N;
         int index;
         int i1;
         int i2;
         int temp;
         while (true) {
-            index = M.length / 2;
+            index = (l + r) / 2;
             N = M[index];
-            i1 = 0;
-            i2 = M.length - 1;
+            i1 = l;
+            i2 = r;
             while (true) {
                 while (M[i1] < N) {
                     i1++;
                 }
-                while (M[i2] > N) {
-                    i2--;
+                try {
+                    while (M[i2] > N) {
+                        i2--;
+                    }
+                } catch (Exception e) {
+                    System.out.println(l + " " + r);
+                    for (int i : M) {
+                        System.out.print(i + " ");
+                    }
                 }
+
                 if (i1 == i2 - 1 && M[i1] > M[i2]) {
                     temp = M[i1];
                     M[i1] = M[i2];
@@ -102,6 +110,17 @@ public class SortLevel {
                     M[i2] = temp;
                 }
             }
+        }
+    }
+
+    public static void QuickSort(int[] array, int left, int right) {
+        if (left == right) {
+            return;
+        }
+        if (left <= right) {
+            int N = ArrayChunk(array, left, right);
+            QuickSort(array, left, N - 1);
+            QuickSort(array, N + 1, right);
         }
     }
 }
