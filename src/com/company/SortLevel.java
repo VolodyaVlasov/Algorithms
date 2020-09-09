@@ -81,17 +81,9 @@ public class SortLevel {
                 while (M[i1] < N) {
                     i1++;
                 }
-                try {
-                    while (M[i2] > N) {
+                while (M[i2] > N) {
                         i2--;
                     }
-                } catch (Exception e) {
-                    System.out.println(l + " " + r);
-                    for (int i : M) {
-                        System.out.print(i + " ");
-                    }
-                }
-
                 if (i1 == i2 - 1 && M[i1] > M[i2]) {
                     temp = M[i1];
                     M[i1] = M[i2];
