@@ -115,4 +115,13 @@ public class SortLevel {
             QuickSort(array, N + 1, right);
         }
     }
+    
+    public static void QuickSortTailOptimization(int[] array, int left, int right) {
+        while (left < right) {
+            int N = ArrayChunk(array, left, right);
+            QuickSortTailOptimization(array, left, N);
+            left = right + 1;
+        }
+    }
+    
 }
