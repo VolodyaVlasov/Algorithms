@@ -126,19 +126,26 @@ public class SortLevel {
         }
     }
 
-    public static int statistic(int[] array, int left, int right, int k) {
-        int N = ArrayChunk(array, left, right);
+
+    public static  List KthOrderStatisticsStep(int[] Array, int L, int R, int k) {
+        final List array = new ArrayList<>();
+        int N = ArrayChunk(Array, L, R);
         if (N == k) {
-            return array[k];
+            array.add(L);
+            array.add(R);
         }
         if (N < k) {
-            return statistic(array, N + 1, right, k);
+            array.add(N + 1);
+            array.add(R);
         } else {
-            return statistic(array, left, N - 1, k);
+            array.add(L);
+            array.add(N - 1);
         }
+        return array;
     }
 
-    public static List KthOrderStatisticsStep(int[] Array, int L, int R, int k) {
+
+    public static List BFPRT(int[] Array, int L, int R, int k) { // not finished
         final List<Integer> array = new ArrayList<>();
         int start = 0;
         int finish = 4;
@@ -147,7 +154,6 @@ public class SortLevel {
             start += 5;
             finish += 5;
         }
-
         int[] arrayMedians = new int[Array.length / 5];
         int medianPosition = 2;
         for (int i = 0; i < Array.length / 5; i++) {
@@ -163,8 +169,6 @@ public class SortLevel {
                 break;
             }
         }
-
-
         if (k == indexOfMM) {
             array.add(L);
             array.add(R);
