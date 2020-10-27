@@ -1,7 +1,9 @@
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class SortLevel {
     public static void SelectionSortStep(int[] array, int i) {
@@ -16,10 +18,10 @@ public class SortLevel {
         array[min] = temp;
     }
 
-    public static boolean BubbleSortStep(int[] array) {
+    public static boolean BubbleSortStep(int[] array, int start, int finish) {
         boolean answer = true;
         int temp;
-        for (int i = 0; i < array.length - 1; i++) {
+        for (int i = start; i < finish; i++) {
             if (array[i] > array[i + 1]) {
                 temp = array[i];
                 array[i] = array[i + 1];
@@ -82,8 +84,8 @@ public class SortLevel {
                     i1++;
                 }
                 while (M[i2] > N) {
-                        i2--;
-                    }
+                    i2--;
+                }
                 if (i1 == i2 - 1 && M[i1] > M[i2]) {
                     temp = M[i1];
                     M[i1] = M[i2];
@@ -115,7 +117,7 @@ public class SortLevel {
             QuickSort(array, N + 1, right);
         }
     }
-    
+
     public static void QuickSortTailOptimization(int[] array, int left, int right) {
         while (left < right) {
             int N = ArrayChunk(array, left, right);
@@ -123,5 +125,54 @@ public class SortLevel {
             left = right + 1;
         }
     }
-    
+
+    public static int statistic(int[] array, int left, int right, int k) {
+        int N = ArrayChunk(array, left, right);
+        if (N == k) {
+            return array[k];
+        }
+        if (N < k) {
+            return statistic(array, N + 1, right, k);
+        } else {
+            return statistic(array, left, N - 1, k);
+        }
+    }
+
+    public static List KthOrderStatisticsStep(int[] Array, int L, int R, int k) {
+        final List<Integer> array = new ArrayList<>();
+        int start = 0;
+        int finish = 4;
+        for (int i = 0; i < Array.length / 5; i++) {
+            while (!BubbleSortStep(Array, start, finish)) ;
+            start += 5;
+            finish += 5;
+        }
+
+        int[] arrayMedians = new int[Array.length / 5];
+        int medianPosition = 2;
+        for (int i = 0; i < Array.length / 5; i++) {
+            arrayMedians[i] = Array[medianPosition];
+            medianPosition += 5;
+        }
+        Arrays.sort(arrayMedians);
+        int medianOfMedians = arrayMedians[arrayMedians.length / 2 + 1];
+        int indexOfMM = 0;
+        for (int i = 0; i < Array.length; i++) {
+            if (Array[i] == medianOfMedians) {
+                indexOfMM = i;
+                break;
+            }
+        }
+
+
+        if (k == indexOfMM) {
+            array.add(L);
+            array.add(R);
+        } else if (indexOfMM > k) {
+
+        } else {
+        }
+
+        return array;
+    }
 }
