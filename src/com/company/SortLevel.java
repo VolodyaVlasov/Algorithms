@@ -1,3 +1,4 @@
+import javax.sound.midi.Soundbank;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -144,8 +145,12 @@ public class SortLevel {
     }
 
 
-    public static List BFPRT(int[] Array, int L, int R, int k) { // not finished
-        final List<Integer> array = new ArrayList<>();
+    public static int BFPRT(int[] Array, int L, int R, int k) { // not finished
+        System.out.println("R - L " + (R - L));
+        if(R - L < 5) {
+            System.out.println("i am here");
+            return -5;
+        }
         int start = 0;
         int finish = 4;
         for (int i = 0; i < Array.length / 5; i++) {
@@ -153,13 +158,19 @@ public class SortLevel {
             start += 5;
             finish += 5;
         }
+        //System.out.println(Arrays.toString(Array));
+
         int[] arrayMedians = new int[Array.length / 5];
         int medianPosition = 2;
         for (int i = 0; i < Array.length / 5; i++) {
             arrayMedians[i] = Array[medianPosition];
             medianPosition += 5;
         }
+
         Arrays.sort(arrayMedians);
+       // System.out.println(Arrays.toString(arrayMedians));
+
+
         int medianOfMedians = arrayMedians[arrayMedians.length / 2 + 1];
         int indexOfMM = 0;
         for (int i = 0; i < Array.length; i++) {
@@ -168,14 +179,16 @@ public class SortLevel {
                 break;
             }
         }
+        //System.out.println(Array[indexOfMM]);
+
         if (k == indexOfMM) {
-            array.add(L);
-            array.add(R);
+            return Array[k];
         } else if (indexOfMM > k) {
-
+            System.out.println("fist " + "L = " + L + " " + "R = " + (indexOfMM - 1));
+            return BFPRT(Array, L, indexOfMM - 1, k);
         } else {
+            System.out.println("second " + "L = " + (indexOfMM + 1) + " " + "R = " + R);
+            return BFPRT(Array, indexOfMM + 1, R, k);
         }
-
-        return array;
     }
 }
