@@ -148,9 +148,11 @@ public class SortLevel {
     public static int BFPRT(int[] Array, int L, int R, int k) { // not finished
         System.out.println("R - L " + (R - L));
         if(R - L < 5) {
+            System.out.println("L " + L + " R " + R);
             System.out.println("i am here");
             return -5;
         }
+
         int start = 0;
         int finish = 4;
         for (int i = 0; i < Array.length / 5; i++) {
@@ -182,6 +184,7 @@ public class SortLevel {
         //System.out.println(Array[indexOfMM]);
 
         if (k == indexOfMM) {
+            System.out.println("I find " + Array[k]);
             return Array[k];
         } else if (indexOfMM > k) {
             System.out.println("fist " + "L = " + L + " " + "R = " + (indexOfMM - 1));
