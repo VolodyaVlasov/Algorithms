@@ -152,14 +152,16 @@ public class SortLevel {
             System.out.println("i am here");
             return -5;
         }
-
-        int start = 0;
-        int finish = 4;
-        for (int i = 0; i < Array.length / 5; i++) {
-            while (!BubbleSortStep(Array, start, finish)) ;
-            start += 5;
-            finish += 5;
+        for (int i = 0; i < Array.length; i+= 5) {
+            if (i + 5 >= Array.length) {
+                while(!SortLevel.BubbleSortStep(Array, i, Array.length - 1));
+            } else {
+                while(!SortLevel.BubbleSortStep(Array, i, i + 4));
+            }
         }
+        int[] medians = new int[(Array.length / 5) + 1];
+
+
         //System.out.println(Arrays.toString(Array));
 
         int[] arrayMedians = new int[Array.length / 5];
@@ -172,7 +174,7 @@ public class SortLevel {
         Arrays.sort(arrayMedians);
        // System.out.println(Arrays.toString(arrayMedians));
 
-
+        int o = Array.length % 5 == 0 ? 1 : 0;
         int medianOfMedians = arrayMedians[arrayMedians.length / 2 + 1];
         int indexOfMM = 0;
         for (int i = 0; i < Array.length; i++) {
