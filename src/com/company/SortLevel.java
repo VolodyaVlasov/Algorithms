@@ -1,7 +1,4 @@
-import javax.sound.midi.Soundbank;
-import java.util.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -127,7 +124,7 @@ public class SortLevel {
     }
 
 
-    public static  List KthOrderStatisticsStep(int[] Array, int L, int R, int k) {
+    public static List KthOrderStatisticsStep(int[] Array, int L, int R, int k) {
         final List array = new ArrayList<>();
         int N = ArrayChunk(Array, L, R);
         if (N == k) {
@@ -146,54 +143,49 @@ public class SortLevel {
 
 
     public static int BFPRT(int[] Array, int L, int R, int k) { // not finished
-        System.out.println("R - L " + (R - L));
-        if(R - L < 5) {
-            System.out.println("L " + L + " R " + R);
-            System.out.println("i am here");
-            return -5;
+        return 0;
+    }
+
+    public static ArrayList MergeSort(ArrayList<Integer> a) {
+        if (a.size() < 2) return a;
+
+        ArrayList<Integer> b = new ArrayList<>();
+        ArrayList<Integer> c = new ArrayList<>();
+        int middle = a.size() / 2;
+
+        for (int i = 0; i < middle; i++) {
+            b.add(a.get(i));
         }
-        for (int i = 0; i < Array.length; i+= 5) {
-            if (i + 5 >= Array.length) {
-                while(!SortLevel.BubbleSortStep(Array, i, Array.length - 1));
+        for (int i = middle; i < a.size(); i++) {
+            c.add(a.get(i));
+        }
+
+        b = MergeSort(b);
+        c = MergeSort(c);
+
+        return merge(b, c);
+    }
+
+    private static ArrayList<Integer> merge(ArrayList<Integer> first, ArrayList<Integer> second) {
+        int firstIndex = 0;
+        int secondIndex = 0;
+        int size = first.size() + second.size();
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            if (firstIndex != first.size() && secondIndex != second.size()) {
+                if (first.get(firstIndex) < second.get(secondIndex)) {
+                    result.add(first.get(firstIndex++));
+                } else {
+                    result.add((second.get(secondIndex++)));
+                }
             } else {
-                while(!SortLevel.BubbleSortStep(Array, i, i + 4));
+                if (firstIndex == first.size()) {
+                    result.add(second.get(secondIndex++));
+                } else {
+                    result.add(first.get(firstIndex++));
+                }
             }
         }
-        int[] medians = new int[(Array.length / 5) + 1];
-
-
-        //System.out.println(Arrays.toString(Array));
-
-        int[] arrayMedians = new int[Array.length / 5];
-        int medianPosition = 2;
-        for (int i = 0; i < Array.length / 5; i++) {
-            arrayMedians[i] = Array[medianPosition];
-            medianPosition += 5;
-        }
-
-        Arrays.sort(arrayMedians);
-       // System.out.println(Arrays.toString(arrayMedians));
-
-        int o = Array.length % 5 == 0 ? 1 : 0;
-        int medianOfMedians = arrayMedians[arrayMedians.length / 2 + 1];
-        int indexOfMM = 0;
-        for (int i = 0; i < Array.length; i++) {
-            if (Array[i] == medianOfMedians) {
-                indexOfMM = i;
-                break;
-            }
-        }
-        //System.out.println(Array[indexOfMM]);
-
-        if (k == indexOfMM) {
-            System.out.println("I find " + Array[k]);
-            return Array[k];
-        } else if (indexOfMM > k) {
-            System.out.println("fist " + "L = " + L + " " + "R = " + (indexOfMM - 1));
-            return BFPRT(Array, L, indexOfMM - 1, k);
-        } else {
-            System.out.println("second " + "L = " + (indexOfMM + 1) + " " + "R = " + R);
-            return BFPRT(Array, indexOfMM + 1, R, k);
-        }
+        return result;
     }
 }
