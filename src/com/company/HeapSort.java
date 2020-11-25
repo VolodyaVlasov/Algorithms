@@ -4,8 +4,7 @@ public class HeapSort {
     HeapSort(int[] a) {
         HeapObject = new Heap();
         HeapObject.MakeHeap(a, getDepth(a));
-
-    }
+     }
 
     public int GetNextMax() {
         return HeapObject.GetMax();
