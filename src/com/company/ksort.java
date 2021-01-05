@@ -1,6 +1,3 @@
-import java.util.HashMap;
-import java.util.Map;
-
 public class ksort {
     final String[] items;
     final static int SIZE = 800;
