@@ -34,5 +34,4 @@ public class BinarySearch {
     int GetResult() {
         return result;
     }
-
 }
