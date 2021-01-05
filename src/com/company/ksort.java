@@ -24,7 +24,7 @@ public class ksort {
     }
 
     private boolean checkFormat(final String s) {
-        return s.length() == 3 && s.charAt(0) >= 97  && s.charAt(0) <= 104 &&
-                Character.isDigit(s.charAt(1)) && Character.isDigit(s.charAt(2));
+        return s.length() == 3 && s.charAt(0) >= 97 && s.charAt(0) <= 104
+                && Character.isDigit(s.charAt(1)) && Character.isDigit(s.charAt(2));
     }
 }
