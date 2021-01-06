@@ -20,14 +20,17 @@ public class BinarySearch {
             result++;
             return;
         }
-        if(Left == Right) {
-            result--;
-            return;
-        }
         if (N > array[middle]) {
             Left = ++middle;
         } else {
             Right = --middle;
+        }
+        if(Left == Right) {
+            if(N == array[Left]) {
+                result++;
+                return;
+            }
+            result--;
         }
     }
 
