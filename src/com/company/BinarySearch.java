@@ -20,10 +20,12 @@ public class BinarySearch {
             result++;
             return;
         }
-        if (N > array[middle]) {
-            Left = ++middle;
-        } else {
-            Right = --middle;
+        if(array.length > 1) {
+            if (N > array[middle]) {
+                Left = ++middle;
+            } else {
+                Right = --middle;
+            }
         }
         if(Left == Right) {
             if(N == array[Left]) {
@@ -36,5 +38,12 @@ public class BinarySearch {
 
     int GetResult() {
         return result;
+    }
+
+    void testHelper(int N) {
+        Step(N);
+        System.out.print(Left + " ");
+        System.out.print(Right + " ");
+        System.out.println(result);
     }
 }
