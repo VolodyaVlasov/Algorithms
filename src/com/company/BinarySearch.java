@@ -12,7 +12,7 @@ public class BinarySearch {
     }
 
     void Step(final int N) {
-        if(result != 0) {
+        if (result != 0) {
             return;
         }
         int middle = (Left + Right) / 2;
@@ -20,18 +20,13 @@ public class BinarySearch {
             result++;
             return;
         }
-        if(array.length > 1) {
-            if (N > array[middle]) {
-                Left = ++middle;
-            } else {
-                Right = --middle;
-            }
+        if (N > array[middle]) {
+            Left = ++middle;
+        } else {
+            Right = --middle;
         }
-        if(Left == Right) {
-            if(N == array[Left]) {
-                result++;
-                return;
-            }
+
+        if (Left == Right) {
             result--;
         }
     }
