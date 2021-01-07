@@ -26,8 +26,8 @@ public class BinarySearch {
             Right = --middle;
         }
 
-        if (Left == Right) {
-            if (N == array[Left]) {
+        if (Right - Left <= 1) {
+            if (N == array[Left] || N == array[Right]) {
                 result++;
                 return;
             }
