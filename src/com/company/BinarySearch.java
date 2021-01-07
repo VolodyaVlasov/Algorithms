@@ -39,11 +39,4 @@ public class BinarySearch {
     int GetResult() {
         return result;
     }
-
-    void testHelper(int N) {
-        Step(N);
-        System.out.print(Left + " ");
-        System.out.print(Right + " ");
-        System.out.println(result);
-    }
 }
