@@ -27,6 +27,10 @@ public class BinarySearch {
         }
 
         if (Left == Right) {
+            if (N == array[Left]) {
+                result++;
+                return;
+            }
             result--;
         }
     }
