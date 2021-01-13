@@ -201,7 +201,7 @@ public class SortLevel {
         index = index > array.length ? array.length - 1 : index;
         if (array[index] >= N) {
             int Left = (int) Math.pow(2, i - 1) - 2 + 1;
-            BSearch bSearch = new BSearch(array, Left, index);
+            BinarySearch bSearch = new BinarySearch(array, Left, index);
             if (Left == index) {
                 return array[index] == N;
             }
@@ -213,45 +213,46 @@ public class SortLevel {
         return false;
     }
 }
-     class BSearch {
-        final int[] array;
-        int result;
-        int Left;
-        int Right;
 
-        BSearch(final int[] array, int Left, int Right) {
-            this.array = array;
-            this.Left = Left;
-            this.Right = Right;
-            result = 0;
+class BinarySearch {
+    final int[] array;
+    int result;
+    int Left;
+    int Right;
+
+    BinarySearch(final int[] array, int Left, int Right) {
+        this.array = array;
+        this.Left = Left;
+        this.Right = Right;
+        result = 0;
+    }
+
+    void Step(final int N) {
+        if (result != 0) {
+            return;
+        }
+        int middle = (Left + Right) / 2;
+        if (N == array[middle]) {
+            result++;
+            return;
+        }
+        if (N > array[middle]) {
+            Left = ++middle;
+        } else {
+            Right = --middle;
         }
 
-        void Step(final int N) {
-            if (result != 0) {
-                return;
-            }
-            int middle = (Left + Right) / 2;
-            if (N == array[middle]) {
+        if (Right - Left <= 1) {
+            if (N == array[Left] || N == array[Right]) {
                 result++;
                 return;
             }
-            if (N > array[middle]) {
-                Left = ++middle;
-            } else {
-                Right = --middle;
-            }
-
-            if (Right - Left <= 1) {
-                if (N == array[Left] || N == array[Right]) {
-                    result++;
-                    return;
-                }
-                result--;
-            }
-        }
-
-        int GetResult() {
-            return result;
+            result--;
         }
     }
+
+    int GetResult() {
+        return result;
+    }
+}
 

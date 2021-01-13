@@ -1,10 +1,10 @@
-public class BinarySearch {
+public class BSearch {
     final int[] array;
     int result;
     int Left;
     int Right;
 
-    BinarySearch(final int[] array) {
+    BSearch(final int[] array) {
         this.array = array;
         Left = 0;
         Right = array.length - 1;
